@@ -248,18 +248,54 @@ const possessivePronouns = [
   }
 ];
 
-pronounExplorer = function () {
+window.pronounExplorer = function () {
   return {
     selectedGender: 'masculine',
     selectedNumber: 'singular',
     genders: ['masculine', 'feminine'],
     numbers: ['singular', 'plural'],
+    selectedCase: '',
     cases: ['nominative', 'accusative', 'dative'],
+    persons: ['1s', '2s', '3s(m)', '3s(f)', '1p', '2p', '3p(m)', '3p(f)'],
+    possessiveVariants: ['m.sg', 'f.sg', 'm.pl', 'f.pl'],
+
+    // Flag to control alternate layout
+    get allMode() {
+      return this.selectedCase !== '';
+    },
+
+    // Standard quadrant table for gender + number
     get filteredData() {
       return possessivePronouns.filter(p => p.gender === this.selectedGender);
+    },
+
+    // Case-driven 3D-style view
+    get tableData() {
+      const variants = {
+        'm.sg': { gender: 'masculine', number: 'singular' },
+        'f.sg': { gender: 'feminine', number: 'singular' },
+        'm.pl': { gender: 'masculine', number: 'plural' },
+        'f.pl': { gender: 'feminine', number: 'plural' }
+      };
+      const data = {};
+      for (const person of this.persons) {
+        data[person] = {};
+        for (const key in variants) {
+          const match = possessivePronouns.find(p =>
+            p.person === person &&
+            p.gender === variants[key].gender &&
+            p[variants[key].number] &&
+            p[variants[key].number][this.selectedCase]
+          );
+          data[person][key] = match ? match[variants[key].number][this.selectedCase] : '-';
+        }
+      }
+      return data;
     }
   };
 };
+
+
 
 
 /**

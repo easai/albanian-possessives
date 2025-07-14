@@ -36,9 +36,19 @@
             </select>
         </div>
 
+        <!-- Case Selector -->
+        <div class="mb-4">
+            <label class="font-semibold mr-2">Focus on Case:</label>
+            <select x-model="selectedCase" class="border rounded px-3 py-2">
+                <option value="">All Cases</option>
+                <template x-for="grCase in cases">
+                    <option :value="grCase" x-text="grCase.charAt(0).toUpperCase() + grCase.slice(1)"></option>
+                </template>
+            </select>
+        </div>
 
         <!-- Table -->
-        <table class="table-auto border-collapse border w-full text-sm">
+        <table x-show="!allMode" class="table-auto border-collapse border w-full text-sm">
             <caption class="caption-top font-semibold text-lg p-2">
                 Possessive Pronoun Forms by Case, Person, and Gender
             </caption>
@@ -51,6 +61,7 @@
                 </tr>
             </thead>
             <tbody>
+
                 <template x-for="entry in filteredData">
                     <tr>
                         <td class="border p-2" x-text="entry.person"></td>
@@ -61,6 +72,32 @@
                 </template>
             </tbody>
         </table>
+
+
+        <table x-show="allMode" class="min-w-full border text-sm">
+            <caption class="caption-top font-semibold text-lg p-2">
+                Pronouns in <span x-text="selectedCase"></span> Case Across Gender/Number
+            </caption>
+            <thead class="bg-blue-100">
+                <tr>
+                    <th class="p-2 border">Person</th>
+                    <template x-for="variant in possessiveVariants">
+                        <th class="p-2 border" x-text="variant"></th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="person in persons">
+                    <tr class="hover:bg-blue-50">
+                        <td class="border p-2 font-medium" x-text="person"></td>
+                        <template x-for="variant in possessiveVariants">
+                            <td class="border p-2" x-text="tableData[person][variant] || '-'"></td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
 
         <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6 mt-4">
             <p class="text-sm">
