@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+
+    <div x-data="pronounExplorer()" class="p-6">
+        <!-- Gender Selector -->
+        <div class="mb-4">
+            <label class="mr-2 font-semibold">Possessed Noun Gender:</label>
+            <select x-model="selectedGender" class="border rounded p-2">
+                <template x-for="gender in genders">
+                    <option :value="gender" x-text="gender"></option>
+                </template>
+            </select>
+        </div>
+
+        <!-- Possessed Noun Number Dropdown -->
+        <div class="mb-4">
+            <label class="mr-2 font-semibold">Possessed Noun Number:</label>
+            <select x-model="selectedNumber" class="border rounded p-2">
+                <template x-for="number in numbers">
+                    <option :value="number" x-text="number"></option>
+                </template>
+            </select>
+        </div>
+
+
+        <!-- Table -->
+        <table class="table-auto border-collapse border w-full text-sm">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="border p-2">Person</th>
+                    <th class="border p-2">Gender</th>
+                    <template x-for="grCase in cases">
+                        <th class="border p-2" x-text="grCase"></th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="entry in filteredData">
+                    <tr>
+                        <td class="border p-2" x-text="entry.person"></td>
+                        <td class="border p-2" x-text="entry.gender"></td>
+                        <template x-for="grCase in cases">
+                            <td class="border p-2" x-text="entry[selectedNumber][grCase] || '-'"></td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
