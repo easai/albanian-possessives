@@ -303,8 +303,8 @@ function getAllCasesForPronouns(pronounsArray, person = "all", gender = "all", n
     });
 }
 
-const table = getAllCasesForPronouns(possessivePronouns, "3p(m)", "all", "all");
-console.table(table);
+// const table = getAllCasesForPronouns(possessivePronouns, "3p(m)", "all", "all");
+// console.table(table);
 
 /**
  * Returns Albanian possessive pronouns filtered by person, possessed noun gender, and number.
