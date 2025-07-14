@@ -10,6 +10,10 @@ An interactive web application for exploring Albanian possessive pronouns across
 
 Built with **Alpine.js**, **Tailwind CSS**, and optionally extendable with **Chart.js** or **3D cube simulations**, this project lets users navigate the full paradigm interactively.
 
+## Live Demo
+
+Explore the full interactive experience here:  
+🔗 [https://easai.github.io/albanian-possessives/](https://easai.github.io/albanian-possessives/)
 
 ## How to Use
 
