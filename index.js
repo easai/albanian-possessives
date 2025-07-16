@@ -103,7 +103,7 @@ const possessivePronouns = [
     plural: {
       nominative: "e saj",
       accusative: "e saj",
-      dative: "së saj"
+      dative: "të saj"
     }
   },
 
@@ -114,12 +114,12 @@ const possessivePronouns = [
     singular: {
       nominative: "e saj",
       accusative: "e saj",
-      dative: "të saj"
+      dative: "së saj"
     },
     plural: {
       nominative: "e saj",
       accusative: "e saj",
-      dative: "të saj"
+      dative: "të saja"
     }
   },
 
